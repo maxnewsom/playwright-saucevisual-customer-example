@@ -49,61 +49,20 @@ if (viewportSize) {
 }
 
 
-// Step 3: Take the final full-page screenshot.
+// Step 3: Take the final full-page screenshot with Playwright.
 // With the dialog expanded and the viewport resized, this should now work.
 await page.screenshot({ path: 'final-full-capture.png', fullPage: true });
 
-  await sauceVisualCheck(page, testInfo, "delivery page", {
+// Step 4: Take final full-page screenshot with Sauce Visual, clipped to the dialog container
+  await sauceVisualCheck( page, testInfo, "delivery page", {
     //captureDom: true,
     screenshotOptions: {
       fullPage: true,
     },
-    //clipSelector: '[data-testid="dialog-container"]'
+    clipSelector: '[data-testid="dialog-container"]'
     });  
 
 
-  // await sauceVisualCheck(page, testInfo, "carry out page", {
-  //   captureDom: true,
-  //   screenshotOptions: {
-  //     fullPage: true,
-  //   },
-  //   clipSelector: '[data-testid="dialog-container"]'
-  //   });  
-  // await page.getByTestId('input-field-zipCode').fill('78209');
-//   await page.getByRole('textbox', { name: 'Zip Code' }).fill('78209')
-//   await page.getByText('Find a store').click();
-//   // await page.getByTestId('clickable-card').click();
-//   // await page.getByRole('button', { name: '3255 Harry Wurzbach Road, San Antonio, TX 78209' }).click();
-//   // await page.getByTestId('dialog-container').getByRole('button', { name: '3255 Harry Wurzbach Road, San Antonio, TX 78209' }).click();
-//   await page.getByText('3255 Harry Wurzbach Road', { exact: true }).click();
-//   await page.getByRole('button', { name: 'Confirm Carryout' })
-//   await sauceVisualCheck(page, testInfo, "inventory page", {
-//       captureDom: true,
-//     });
-//   await page.getByTestId('Specialty-img-sm').click();
-//   await page.getByTestId('clickable-card').click();
-//   await page.getByText('Add To Cart').click();
-//   await page.getByLabel('View cart - 1 item').click();
-//   await sauceVisualCheck(page, testInfo, "clipped element", {
-//       captureDom: true,
-//       // screenshotOptions: {
-//       //   fullPage: false,
-//       // },
-//       clipSelector: '[data-testid="dialogue-container"]',
-//     });
-//   // await sauceVisualCheck(page, testInfo, "clipped element", {
-//   //     captureDom: true,
-//   //     clipSelector: '[data-testid="cart-container"]',
-//   //   });
-// // });
 
-// // test('get started link', async ({ page }) => {
-// //   await page.goto('https://playwright.dev/');
-
-// //   // Click the get started link.
-// //   await page.getByRole('link', { name: 'Get started' }).click();
-
-// //   // Expects page to have a heading with the name of Installation.
-// //   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
 
