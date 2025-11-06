@@ -1,6 +1,9 @@
-import { expect, test } from '@playwright/test';
+// import { expect, test } from '@playwright/test';
 // Import `sauceVisualCheck` from our visual plugin
 import { sauceVisualCheck } from '@saucelabs/visual-playwright';
+import { test, expect } from '../custom-test';
+//import { test, expect } from '../expand-content-resize';
+import { expandContentAndResizeViewport } from '../expand-content-resize'
 
 test('cart test', async ({ page }, testInfo) => {
   await page.goto('https://www.dominos.com/');
@@ -64,5 +67,25 @@ await page.screenshot({ path: 'final-full-capture.png', fullPage: true });
 
 
 
+})
+
+test('alternate', async ({ page }, testInfo) => {
+  await page.goto('https://www.dominos.com/');
+
+
+  await page.getByLabel('Menu').click();
+  await page.getByRole('button', { name: 'Order Now' }).click();
+  //await page.getByRole('button', { name: "Carryout, Pick-up your order at a nearby Domino's." }).click();
+  await page.getByRole('button', { name: 'Delivery, Get your order'}).click();
+
+await expandContentAndResizeViewport(page);
+  
+  await sauceVisualCheck( page, testInfo, "delivery page", {
+    //captureDom: true,
+    screenshotOptions: {
+      fullPage: true,
+    },
+    clipSelector: '[data-testid="dialog-container"]'
+    });  
 });
 

@@ -7,6 +7,9 @@ export const test = base.extend<SauceVisualFixtures>({
     ...sauceVisualFixtures({
         // You can append some of the options available in the 'Check Options' section below. Ex:
          captureDom: true,
+         diffingOptions: {
+            content: false,
+         },
         // delay: 200,
     }),
 });
